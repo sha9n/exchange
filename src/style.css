@@ -4,7 +4,9 @@ body {
 }
 
 #app {
-  width: 80%;
+  display: flex;
+  align-items: flex-end;
+  width: 60%;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
@@ -16,7 +18,7 @@ h1 {
   font-size: 36px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }
 
 input[type="input"],
@@ -30,9 +32,6 @@ select {
 }
 
 select {
-  appearance: none;
-  -webkit-appearance: none;
-  background: url("src/arrow-down.svg") no-repeat right center;
   background-size: 16px 16px;
   padding-right: 30px;
 }
