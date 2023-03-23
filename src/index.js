@@ -4,9 +4,19 @@ const inputCurrency = document.getElementById("inputCurrency");
 const currencyList = document.getElementById("currencyList");
 const outputCurrency = document.getElementById("outputCurrency");
 
+currencyList.disabled = true;
+inputCurrency.disabled = true;
+outputCurrency.disabled = true;
+currencyList.insertAdjacentHTML("beforebegin", '<div class="loader">Loading...</div>');
+
 fetch(apiUrl)
   .then((response) => response.json())
   .then((data) => {
+    document.querySelector('.loader').remove();
+    currencyList.disabled = false;
+    inputCurrency.disabled = false;
+    outputCurrency.disabled = false;
+
     const currencies = data.Valute;
     for (const [key, value] of Object.entries(currencies)) {
       const option = document.createElement("option");
@@ -14,6 +24,10 @@ fetch(apiUrl)
       option.textContent = `${key} (${value.Name})`;
       currencyList.appendChild(option);
     }
+  })
+  .catch((error) => {
+    document.querySelector('.loader').remove();
+    currencyList.insertAdjacentHTML("beforebegin", '<div class="error-message">Error loading data</div>');
   });
 
 function convertCurrency() {
