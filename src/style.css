@@ -5,9 +5,11 @@ body {
 
 #app {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 60%;
-  height: 175px;
+  height: 300px;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
@@ -19,12 +21,13 @@ h1 {
   font-size: 36px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 input[type="input"],
 select {
   width: 100%;
+  max-width: 200px;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -35,12 +38,15 @@ select {
 select {
   background-size: 16px 16px;
   padding-right: 30px;
+  max-width: 523px;
 }
 
 input[type="input"] {
   text-align: right;
+  max-width: 500px;
 }
 
 #outputCurrency {
   font-weight: bold;
+  max-width: 500px;
 }
