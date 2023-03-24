@@ -29,9 +29,8 @@ fetch(apiUrl)
     currencyList.insertAdjacentHTML("beforebegin", '<div class="error-message">Error loading data</div>');
   });
 
-  function convertCurrency() {
-    const selectedCurrency = currencyList.value;
-    localStorage.setItem("selectedCurrency", selectedCurrency);
+function convertCurrency() {
+  const selectedCurrency = currencyList.value;
   if (inputCurrency.value !== "") {
     fetch(apiUrl)
       .then((response) => response.json())
@@ -45,12 +44,6 @@ fetch(apiUrl)
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const savedCurrency = localStorage.getItem("selectedCurrency");
-  if (savedCurrency) {
-    currencyList.value = savedCurrency;
-  }
-});
 
 
 inputCurrency.addEventListener("input", convertCurrency);
