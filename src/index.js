@@ -37,7 +37,6 @@ fetch(apiUrl)
     document.querySelectorAll('select, input').forEach(elem => elem.style.display = 'none');
   });
 
-
 function convertCurrency() {
   const selectedCurrency = currencyList.value;
   localStorage.setItem("selectedCurrency", selectedCurrency);
