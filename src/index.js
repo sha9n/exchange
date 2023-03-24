@@ -9,6 +9,8 @@ inputCurrency.disabled = true;
 outputCurrency.disabled = true;
 currencyList.insertAdjacentHTML("beforebegin", '<div class="loader">Loading...</div>');
 
+const savedCurrency = localStorage.getItem("selectedCurrency");
+
 fetch(apiUrl)
   .then((response) => response.json())
   .then((data) => {
@@ -23,15 +25,22 @@ fetch(apiUrl)
       option.textContent = `${key} (${value.Name})`;
       currencyList.appendChild(option);
     }
+    if (savedCurrency) {
+      currencyList.value = savedCurrency;
+    }
   })
   .catch((error) => {
     document.querySelector('.loader').remove();
     currencyList.insertAdjacentHTML("beforebegin", '<div class="error-message">Error loading data</div>');
+    const errorMessage = document.querySelector('.error-message');
+    errorMessage.style.color = 'red';
+    document.querySelectorAll('select, input').forEach(elem => elem.style.display = 'none');
   });
 
-  function convertCurrency() {
-    const selectedCurrency = currencyList.value;
-    localStorage.setItem("selectedCurrency", selectedCurrency);
+
+function convertCurrency() {
+  const selectedCurrency = currencyList.value;
+  localStorage.setItem("selectedCurrency", selectedCurrency);
   if (inputCurrency.value !== "") {
     fetch(apiUrl)
       .then((response) => response.json())
@@ -44,14 +53,6 @@ fetch(apiUrl)
       });
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const savedCurrency = localStorage.getItem("selectedCurrency");
-  if (savedCurrency) {
-    currencyList.value = savedCurrency;
-  }
-});
-
 
 inputCurrency.addEventListener("input", convertCurrency);
 currencyList.addEventListener("change", convertCurrency);
