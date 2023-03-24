@@ -15,13 +15,18 @@ body {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(-45deg, #de6945, #da2f71, #1c97c3, #cf07e9 );
+  background-size: 400% 400%;
+  -webkit-animation: gradientBG 10s ease infinite;
+  animation: gradientBG 10s ease infinite;
 }
 
 h1 {
-  font-size: 36px;
+  font-size: 61px;
   font-weight: bold;
   color: #333;
   margin-bottom: 20px;
+  color: white;
 }
 
 input[type="input"],
@@ -49,4 +54,28 @@ input[type="input"] {
 #outputCurrency {
   font-weight: bold;
   max-width: 500px;
+  background-color: white;
+}
+
+@-webkit-keyframes gradientBG {
+  0% {
+  background-position: 0% 50%;
+  }
+  50% {
+  background-position: 100% 50%;
+  }
+  100% {
+  background-position: 0% 50%;
+  }
+}
+@keyframes gradientBG {
+  0% {
+  background-position: 0% 50%;
+  }
+  50% {
+  background-position: 100% 50%;
+  }
+  100% {
+  background-position: 0% 50%;
+  }
 }
