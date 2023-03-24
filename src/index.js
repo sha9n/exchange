@@ -15,8 +15,7 @@ fetch(apiUrl)
     document.querySelector('.loader').remove();
     currencyList.disabled = false;
     inputCurrency.disabled = false;
-    outputCurrency.disabled = false;
-
+    outputCurrency.disabled = true;
     const currencies = data.Valute;
     for (const [key, value] of Object.entries(currencies)) {
       const option = document.createElement("option");
@@ -30,8 +29,9 @@ fetch(apiUrl)
     currencyList.insertAdjacentHTML("beforebegin", '<div class="error-message">Error loading data</div>');
   });
 
-function convertCurrency() {
-  const selectedCurrency = currencyList.value;
+  function convertCurrency() {
+    const selectedCurrency = currencyList.value;
+    localStorage.setItem("selectedCurrency", selectedCurrency);
   if (inputCurrency.value !== "") {
     fetch(apiUrl)
       .then((response) => response.json())
@@ -39,11 +39,19 @@ function convertCurrency() {
         const rate = data.Valute[selectedCurrency].Value;
         const inputAmount = parseFloat(inputCurrency.value);
         if (!isNaN(inputAmount)) {
-          outputCurrency.value = (inputAmount * rate).toFixed(2);
+          outputCurrency.value = (inputAmount * rate).toFixed(2) + " ₽";
         }
       });
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedCurrency = localStorage.getItem("selectedCurrency");
+  if (savedCurrency) {
+    currencyList.value = savedCurrency;
+  }
+});
+
 
 inputCurrency.addEventListener("input", convertCurrency);
 currencyList.addEventListener("change", convertCurrency);
